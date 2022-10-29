@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply mx-auto;
+    width: clamp(375px, 40vw, 750px);
+  }
+
+  .b-yellow {
+    @apply border-2 border-yellow-400 border-solid;
+  }
+}
