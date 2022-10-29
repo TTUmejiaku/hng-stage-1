@@ -4,8 +4,8 @@
 
 @layer components {
   .container {
-    @apply mx-auto;
-    width: clamp(375px, 40vw, 750px);
+    @apply mx-auto mt-10 px-4;
+    width: clamp(375px, 60vw, 950px);
   }
 
   .b-yellow {
