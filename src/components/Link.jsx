@@ -6,7 +6,7 @@ const Link = ({ url, id, name, subText }) => {
       <a href={url} id={id} className="">
         {name}
       </a>
-      <small>{subText}</small>
+      {/* <small>{subText}</small> */}
     </div>
   );
 };
