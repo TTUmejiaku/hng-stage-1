@@ -2,13 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --gray__200: 220deg 17% 93%; /* #eaecf0 */
+    --gray__900: 220deg 43% 11%; /* #101828 */
+    --gray__300: 217deg 16% 84%; /* #D0D5DD */
+    --gray__400: 218deg 15% 65%; /* #98A2B3 */
+  }
+}
+
 @layer components {
   .container {
     @apply mx-auto mt-10 px-4;
-    width: clamp(375px, 60vw, 950px);
+    width: clamp(375px, 90vw, 950px);
   }
 
   .b-yellow {
     @apply border-2 border-yellow-400 border-solid;
+  }
+
+  .link-width {
+    width: clamp(375px, 90vw, 950px);
   }
 }

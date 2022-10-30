@@ -15,7 +15,7 @@ const ProfileSection = () => {
       <div className="w-24 h-24 rounded-full mx-auto">
         <img id="profile__img" src={ProfileImg} alt="TTUmejiaku" />
       </div>
-      <h2 id="twitter" className="mt-6 font-bold text-xl text-gray-700">
+      <h2 id="twitter" className="mt-6 font-bold text-xl text-gray900">
         TTUmejiaku
       </h2>
       <h3 id="slack" className="invisible">

@@ -13,7 +13,7 @@ export const linkData = [
     id: "books",
     url: "http://books.zuri.team",
     name: "Zuri Books",
-    subText: "This is where you find books about design and coding",
+    subText: "Find books about design and coding here",
   },
   {
     id: "book__python",
@@ -25,8 +25,7 @@ export const linkData = [
     id: "pitch",
     url: "https://background.zuri.team",
     name: "Background Check for Coders",
-    subText:
-      "Never worry about rigorous background checks on coders, we handle all of that for you.",
+    subText: "Never worry about background checks on coders anymore.",
   },
   {
     id: "book_design",
