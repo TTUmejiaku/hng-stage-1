@@ -33,4 +33,8 @@ export const linkData = [
     name: "Design Books",
     subText: "Get the design book by Zuri, for free.",
   },
+  {
+    id: "contact",
+    name: "Contact Me",
+  },
 ];

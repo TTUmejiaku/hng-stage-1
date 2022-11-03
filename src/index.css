@@ -8,6 +8,16 @@
     --gray__900: 220deg 43% 11%; /* #101828 */
     --gray__300: 217deg 16% 84%; /* #D0D5DD */
     --gray__400: 218deg 15% 65%; /* #98A2B3 */
+    --gray__500: 216deg 18% 34%; /* #475467 */
+    --gray__700: 218deg 24% 27%; /* #344054 */
+    --blue__600: 215deg 87% 51%; /*#1570EF*/
+
+    /* fonts */
+    --fs-xs: clamp(0.75rem, 1vw + 0.5rem, 0.875rem); /* 12px/14px*/
+    --fs-sm: clamp(0.875rem, 1vw + 0.75rem, 1rem); /* 14px/16px*/
+    --fs-md: clamp(1rem, 1.5vw + 0.875rem, 1.125rem); /* 16px/18px*/
+    --fs-lg: clamp(1.125rem, 1.5vw + 1rem, 1.5rem); /* 21px/24px*/
+    --fs-xl: clamp(1.25rem, 3.5vw + 1rem, 2rem); /* 24px/32px*/
   }
 }
 
@@ -23,5 +33,18 @@
 
   .link-width {
     width: clamp(375px, 90vw, 950px);
+  }
+
+  .form__group {
+    @apply flex flex-col mt-6;
+  }
+
+  .form__input,
+  .form__textarea {
+    @apply border border-solid border-gray300 text-gray400 py-3 px-4 rounded-xl placeholder:text-small placeholder:text-gray500;
+  }
+
+  .form__label {
+    @apply text-xSmall text-gray700;
   }
 }

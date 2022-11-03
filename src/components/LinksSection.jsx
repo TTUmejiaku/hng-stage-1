@@ -1,10 +1,10 @@
 import React from "react";
 import { linkData } from "../../linkData";
-import Link from "./Link";
+import ButtonLink from "./Link";
 
 const LinksSection = () => {
   const linksLists = linkData.map((link) => (
-    <Link
+    <ButtonLink
       key={link.id}
       url={link.url}
       id={link.id}

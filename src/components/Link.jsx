@@ -1,11 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Contact from "./Contact";
 
-const Link = ({ url, id, name, subText }) => {
+const ButtonLink = ({ url, id, name, subText }) => {
   return (
     <div className="group bg-gray200 text-center py-5 rounded-lg flex flex-col space-y-4 hover:bg-gray300 relative">
-      <a href={url} id={id} className="text-gray900 peer">
-        {name}
-      </a>
+      {id === "contact" ? (
+        <Link to={`/contact`} className="text-gray900 peer">
+          {name}
+        </Link>
+      ) : (
+        <a href={url} id={id} className="text-gray900 peer">
+          {name}
+        </a>
+      )}
+
       {subText && (
         <>
           <div className=" hidden absolute -top-10 left-1/2 -translate-x-1/2 rounded-lg lg:peer-hover:block bg-gray900 py-1 px-4">
@@ -18,4 +27,4 @@ const Link = ({ url, id, name, subText }) => {
   );
 };
 
-export default Link;
+export default ButtonLink;
