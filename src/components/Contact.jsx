@@ -9,6 +9,9 @@ const Contact = () => {
     message: "",
     agreeTerms: false,
   });
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,6 +20,25 @@ const Contact = () => {
       ...prevFormData,
       [name]: type === "checkbox" ? checked : value,
     }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(e);
+
+    setIsSubmitting(true);
+    setMessage("Message sent successfully");
+
+    setTimeout(() => {
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+        agreeTerms: false,
+      });
+      setMessage("");
+      setIsSubmitting(false);
+    }, 5000);
   };
 
   return (
@@ -28,7 +50,12 @@ const Contact = () => {
             Hi there, contact me to ask me about anything you have in mind.
           </p>
         </header>
-        <form className="mt-12 mb-20">
+        {message && (
+          <div className="w-full bg-green-200 text-gray500 mt-10 px-4 py-4">
+            {message}
+          </div>
+        )}
+        <form className="mt-10 mb-20" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="form__group md:w-full">
               <label htmlFor="first_name" className="form__label">
@@ -38,7 +65,7 @@ const Contact = () => {
                 id="first_name"
                 type="text"
                 placeholder="Enter your first name"
-                className="form-input form__input"
+                className="form__input"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
@@ -52,7 +79,7 @@ const Contact = () => {
                 id="last_name"
                 type="text"
                 placeholder="Enter your last name"
-                className="form-input form__input"
+                className="form__input"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
@@ -60,18 +87,19 @@ const Contact = () => {
             </div>
           </div>
           <div className="form__group">
-            <label htmlFor="" className="form__label">
+            <label htmlFor="email" className="form__label">
               Email
             </label>
             <input
               id="email"
               type="email"
               placeholder="yourname@email.com"
-              className="form-input form__input"
               name="email"
+              required
               value={formData.email}
               onChange={handleChange}
             />
+            <small className="text-sm text-gray500">Use a valid email</small>
           </div>
           <div className="form__group">
             <label htmlFor="message" className="form__label">
@@ -79,29 +107,41 @@ const Contact = () => {
             </label>
             <textarea
               id="message"
+              type="textarea"
               placeholder="Send me a message and I'll reply you as soon as possible..."
-              className="form-textarea form__textarea h-32"
+              className="peer invalid:border-priRed"
               name="message"
               value={formData.message}
               onChange={handleChange}
+              required
             />
+            <small className="hidden peer-invalid:block peer-invalid:text-priRed text-sm">
+              Please enter a message
+            </small>
+            {/* {isEmpty && (
+            )} */}
           </div>
           <div className="flex flex-row item-center mt-6 space-x-2">
             <input
               id="agreeTerms"
               type="checkbox"
               checked={formData.agree}
-              className="form-checkbox mb-4"
               name="agreeTerms"
               onChange={handleChange}
+              required
             />
             <label htmlFor="agreeTerms" className="form__label ">
               You agree to providing your data to Temple who may contact you.
             </label>
           </div>
+
           <button
+            type="submit"
             id="btn__submit"
-            className="bg-blue600 w-full text-white py-3 rounded-xl mt-8 font-semibold"
+            className={`bg-blue600 w-full text-white py-3 rounded-xl mt-8 font-semibold cursor-pointer ${
+              isSubmitting ? "bg-blue300" : ""
+            }`}
+            disabled={isSubmitting}
           >
             Send message
           </button>

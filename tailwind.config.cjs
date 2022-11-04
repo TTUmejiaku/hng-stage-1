@@ -12,6 +12,9 @@ module.exports = {
         gray700: "hsl(var(--gray__700))",
         gray900: "hsl(var(--gray__900))",
         blue600: "hsl(var(--blue__600))",
+        blue200: "hsl(var(--blue__200))",
+        blue300: "hsl(var(--blue__300))",
+        priRed: "hsl(var(--red))",
       },
       fontSize: {
         xLarge: "var(--fs-xl)",
@@ -22,5 +25,5 @@ module.exports = {
       },
     },
   },
-  plugins: ["@tailwindcss/forms"],
+  plugins: [require("@tailwindcss/forms")],
 };
