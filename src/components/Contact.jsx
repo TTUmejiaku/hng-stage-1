@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./Footer";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const myName = "Temple";
+  const initialFormData = {
     firstName: "",
     lastName: "",
     email: "",
     message: "",
     agreeTerms: false,
-  });
-  const [isEmpty, setIsEmpty] = useState(false);
+  };
+  const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,20 +28,39 @@ const Contact = () => {
     e.preventDefault(e);
 
     setIsSubmitting(true);
-    setMessage("Message sent successfully");
-
-    setTimeout(() => {
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        message: "",
-        agreeTerms: false,
-      });
-      setMessage("");
-      setIsSubmitting(false);
-    }, 5000);
+    setErrorMessages(validateForm(formData));
   };
+
+  const validateForm = (formValues) => {
+    const errors = {};
+    const emailRegex =
+      /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+
+    if (!formValues.email) {
+      errors.email = "Email field cannot be empty";
+    } else if (!emailRegex.test(formValues.email)) {
+      errors.email = "Please enter a valid email";
+    }
+
+    if (!formValues.message) {
+      errors.message = "Please enter a message";
+    }
+
+    return errors;
+  };
+
+  useEffect(() => {
+    if (Object.keys(errorMessages).length === 0 && isSubmitting) {
+      setSuccessMessage("Message sent successfully");
+      setTimeout(() => {
+        setFormData(initialFormData);
+        setSuccessMessage("");
+        setIsSubmitting(false);
+      }, 3000);
+    } else {
+      setIsSubmitting(false);
+    }
+  }, [errorMessages]);
 
   return (
     <div className="mt-20">
@@ -50,12 +71,12 @@ const Contact = () => {
             Hi there, contact me to ask me about anything you have in mind.
           </p>
         </header>
-        {message && (
+        {successMessage && (
           <div className="w-full bg-green-200 text-gray500 mt-10 px-4 py-4">
-            {message}
+            {successMessage}
           </div>
         )}
-        <form className="mt-10 mb-20" onSubmit={handleSubmit}>
+        <form className="mt-5 mb-20 lg:mb-32" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="form__group md:w-full">
               <label htmlFor="first_name" className="form__label">
@@ -95,11 +116,18 @@ const Contact = () => {
               type="email"
               placeholder="yourname@email.com"
               name="email"
-              required
+              className={`${errorMessages.email ? "border-priRed" : ""}`}
               value={formData.email}
               onChange={handleChange}
+              formNoValidate={true}
             />
-            <small className="text-sm text-gray500">Use a valid email</small>
+            <small
+              className={`text-sm text-gray500 ${
+                errorMessages.email ? "text-priRed" : ""
+              }`}
+            >
+              {errorMessages.email}
+            </small>
           </div>
           <div className="form__group">
             <label htmlFor="message" className="form__label">
@@ -109,29 +137,30 @@ const Contact = () => {
               id="message"
               type="textarea"
               placeholder="Send me a message and I'll reply you as soon as possible..."
-              className="peer invalid:border-priRed"
+              className={`${errorMessages.message ? "border-priRed" : ""}`}
               name="message"
               value={formData.message}
               onChange={handleChange}
-              required
             />
-            <small className="hidden peer-invalid:block peer-invalid:text-priRed text-sm">
-              Please enter a message
+            <small
+              className={`text-sm text-gray500 ${
+                errorMessages.message ? "text-priRed" : ""
+              }`}
+            >
+              {errorMessages.message}
             </small>
-            {/* {isEmpty && (
-            )} */}
           </div>
           <div className="flex flex-row item-center mt-6 space-x-2">
             <input
               id="agreeTerms"
               type="checkbox"
-              checked={formData.agree}
+              checked={formData.agreeTerms}
               name="agreeTerms"
               onChange={handleChange}
               required
             />
             <label htmlFor="agreeTerms" className="form__label ">
-              You agree to providing your data to Temple who may contact you.
+              You agree to providing your data to {myName} who may contact you.
             </label>
           </div>
 
