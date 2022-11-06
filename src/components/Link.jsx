@@ -6,7 +6,7 @@ const ButtonLink = ({ url, id, name, subText }) => {
   return (
     <div className="group bg-gray200 text-center py-5 rounded-lg flex flex-col space-y-4 hover:bg-gray300 relative">
       {id === "contact" ? (
-        <Link to={`/contact`} className="text-gray900 peer">
+        <Link id={id} to={`/contact`} className="text-gray900 peer">
           {name}
         </Link>
       ) : (
